@@ -35,7 +35,7 @@ participants/
 
 **Exemple concret :**
 ```
-participants/marie-victoire/ventes-supermarche/
+participants/mary/ventes-supermarche/
 ├── data/ventes.csv
 ├── notebook.ipynb
 └── README.md
@@ -50,7 +50,7 @@ Format obligatoire :
 prenom-nom/nom-dataset
 ```
 
-Exemples valides : `marie-victoire/ventes-supermarche`, `jean-paul/covid-cameroun`
+Exemples valides : `mary/ventes-supermarche`, `jean-paul/covid-cameroun`
 
 ❌ Pas d'espaces, d'accents, ni de majuscules dans le nom de branche.
 
@@ -126,6 +126,53 @@ Python, Pandas, Power BI, etc.
 
 ---
 
+## 🐍 Environnement virtuel & dépendances
+
+Le dépôt utilise **un seul environnement Python partagé**, géré avec **[uv](https://docs.astral.sh/uv/)**. Il contient déjà tout ce qu'il faut : le fichier `pyproject.toml` (les dépendances) et le fichier `.python-version` (la version de Python à utiliser). Tu n'as rien à initialiser toi-même.
+
+### Étape 1 : Installer uv (une seule fois)
+
+**Linux / macOS / WSL :**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Windows (PowerShell) :**
+```powershell
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+### Étape 2 : Créer l'environnement
+
+Ouvre un terminal à la racine du dépôt (dans VS Code : clic droit sur le dossier → "Open in Integrated Terminal") et tape :
+
+```bash
+uv sync
+```
+
+`uv` télécharge la bonne version de Python si elle n'est pas déjà sur ta machine, puis crée un dossier `.venv/` — c'est ton environnement, prêt à l'emploi. Il n'est jamais commité (déjà exclu par le `.gitignore`).
+
+Active-le si besoin :
+```bash
+source .venv/bin/activate      # sous Windows : .venv\Scripts\activate
+```
+
+### Étape 3 : Ajouter une bibliothèque (seulement si demandé)
+
+La plupart du temps tu n'as rien à ajouter. Si un projet a besoin d'une bibliothèque supplémentaire, ce sera précisé explicitement dans les instructions ou le notebook. Dans ce cas :
+
+```bash
+uv add nom-du-package
+```
+
+Committe ensuite `pyproject.toml` et `uv.lock` avec ton travail :
+```bash
+git add pyproject.toml uv.lock
+git commit -m "Ajout de nom-du-package"
+```
+
+---
+
 ## 📦 Jeux de données volumineux
 
 GitHub refuse les fichiers de plus de 100 Mo. Si ton dataset est lourd :
@@ -141,6 +188,12 @@ GitHub refuse les fichiers de plus de 100 Mo. Si ton dataset est lourd :
 - [ ] Aucun fichier de plus de 50 Mo n'est commité directement
 - [ ] Le nom de ma branche suit le format `prenom-nom/nom-dataset`
 - [ ] J'ai vérifié que ma PR cible bien `main`
+
+---
+
+## 🙈 Fichier `.gitignore`
+
+Le dépôt contient un `.gitignore` à la racine qui exclut automatiquement les environnements virtuels, fichiers temporaires et checkpoints Jupyter. Tu n'as rien à faire, mais évite de forcer l'ajout de ces fichiers avec `git add -f`.
 
 ---
 
