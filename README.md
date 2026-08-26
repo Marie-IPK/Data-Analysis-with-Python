@@ -60,8 +60,8 @@ Exemples valides : `marie-victoire/ventes-supermarche`, `jean-paul/covid-camerou
 
 ### 1. Cloner le dépôt (une seule fois)
 ```bash
-git clone [LIEN DU DÉPÔT]
-cd [nom-du-dépôt]
+git clone git@github.com:Marie-IPK/Data-Analysis-with-Python.git
+cd Data-Analysis-with-Python
 ```
 
 ### 2. Se mettre à jour avant de commencer
